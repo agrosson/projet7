@@ -9,7 +9,7 @@
 import Foundation
 
 class Brain {
-    var stringNumbers = [String]()
+    var stringNumbers = [String()]
     var operators = ["+"]
     init() {}
 }

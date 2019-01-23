@@ -10,12 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: - Properties
-    var stringNumbers: [String] = [String()]
-    var operators: [String] = ["+"]
+    let brain = Brain()
     var isExpressionCorrect: Bool {
-        if let stringNumber = stringNumbers.last {
+        if let stringNumber = brain.stringNumbers.last {
             if stringNumber.isEmpty {
-                if stringNumbers.count == 1 {
+                if brain.stringNumbers.count == 1 {
                     alertNewCalculation()
                 } else {
                     alertEnterCorrectExpression()
@@ -26,7 +25,7 @@ class ViewController: UIViewController {
         return true
     }
     var canAddOperator: Bool {
-        if let stringNumber = stringNumbers.last {
+        if let stringNumber = brain.stringNumbers.last {
             if stringNumber.isEmpty {
                 alertIncorrectExpresion()
                 return false
@@ -43,33 +42,41 @@ class ViewController: UIViewController {
 
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
+                print(index)
                 addNewNumber(index)
             }
     }
 
     @IBAction func multiply(_ sender: UIButton) {
         if canAddOperator {
-            operators.append("*")
-            stringNumbers.append("")
+            brain.operators.append("*")
+            brain.stringNumbers.append("")
             updateDisplay()
         }
     }
     @IBAction func plus() {
         if canAddOperator {
-        	operators.append("+")
-        	stringNumbers.append("")
+        	brain.operators.append("+")
+        	brain.stringNumbers.append("")
             updateDisplay()
         }
     }
 
     @IBAction func minus() {
         if canAddOperator {
-            operators.append("-")
-            stringNumbers.append("")
+            brain.operators.append("-")
+            brain.stringNumbers.append("")
             updateDisplay()
         }
     }
 
+    @IBAction func divide(_ sender: UIButton) {
+        if canAddOperator {
+            brain.operators.append("/")
+            brain.stringNumbers.append("")
+            updateDisplay()
+        }
+    }
     @IBAction func equal() {
         calculateTotal()
     }
@@ -98,10 +105,10 @@ class ViewController: UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     func addNewNumber(_ newNumber: Int) {
-        if let stringNumber = stringNumbers.last {
+        if let stringNumber = brain.stringNumbers.last {
             var stringNumberMutable = stringNumber
             stringNumberMutable += "\(newNumber)"
-            stringNumbers[stringNumbers.count-1] = stringNumberMutable
+            brain.stringNumbers[brain.stringNumbers.count-1] = stringNumberMutable
         }
         updateDisplay()
     }
@@ -111,8 +118,8 @@ class ViewController: UIViewController {
             return
         }
         var total = ""
-        for (index, number) in stringNumbers.enumerated() {
-            total += operators[index] + "\(number)"
+        for (index, number) in brain.stringNumbers.enumerated() {
+            total += brain.operators[index] + "\(number)"
         }
         print(total)
         if total.first == "+" {
@@ -126,19 +133,19 @@ class ViewController: UIViewController {
 
     func updateDisplay() {
         var text = ""
-        for (index, stringNumber) in stringNumbers.enumerated() {
+        for (index, myNumber) in brain.stringNumbers.enumerated() {
             // Add operator
             if index > 0 {
-                text += operators[index]
+                text += brain.operators[index]
             }
             // Add number
-            text += stringNumber
+            text += myNumber
         }
         textView.text = text
     }
 
     func clear() {
-        stringNumbers = [String()]
-        operators = ["+"]
+        brain.stringNumbers = [String()]
+        brain.operators = ["+"]
     }
 }
