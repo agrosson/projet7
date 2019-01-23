@@ -10,7 +10,7 @@ import XCTest
 @testable import CountOnMe
 
 class CountOnMeTests: XCTestCase {
-    func testFirst(){
+    func testFirst() {
         XCTAssert(true)
     }
 }
