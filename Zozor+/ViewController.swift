@@ -34,29 +34,6 @@ class ViewController: UIViewController {
         }
         return true
     }
-
-    // MARK: - Methods
-    func alertNewCalculation() {
-        let alertVC = UIAlertController(title: "Zéro!",
-                                        message: "Démarrez un nouveau calcul !",
-                                        preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    func alertEnterCorrectExpression() {
-        let alertVC = UIAlertController(title: "Zéro!",
-                                        message: "Entrez une expression correcte !",
-                                        preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    func alertIncorrectExpresion() {
-        let alertVC = UIAlertController(title: "Zéro!",
-                                        message: "Expression incorrecte !",
-                                        preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
     // MARK: - Outlets
 
     @IBOutlet weak var textView: UITextView!
@@ -70,6 +47,13 @@ class ViewController: UIViewController {
             }
     }
 
+    @IBAction func multiply(_ sender: UIButton) {
+        if canAddOperator {
+            operators.append("*")
+            stringNumbers.append("")
+            updateDisplay()
+        }
+    }
     @IBAction func plus() {
         if canAddOperator {
         	operators.append("+")
@@ -92,6 +76,27 @@ class ViewController: UIViewController {
 
     // MARK: - Methods
 
+    func alertNewCalculation() {
+        let alertVC = UIAlertController(title: "Zéro!",
+                                        message: "Démarrez un nouveau calcul !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    func alertEnterCorrectExpression() {
+        let alertVC = UIAlertController(title: "Zéro!",
+                                        message: "Entrez une expression correcte !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    func alertIncorrectExpresion() {
+        let alertVC = UIAlertController(title: "Zéro!",
+                                        message: "Expression incorrecte !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
     func addNewNumber(_ newNumber: Int) {
         if let stringNumber = stringNumbers.last {
             var stringNumberMutable = stringNumber
@@ -105,20 +110,17 @@ class ViewController: UIViewController {
         if !isExpressionCorrect {
             return
         }
-
-        var total = 0
-        for (index, stringNumber) in stringNumbers.enumerated() {
-            if let number = Int(stringNumber) {
-                if operators[index] == "+" {
-                    total += number
-                } else if operators[index] == "-" {
-                    total -= number
-                }
-            }
+        var total = ""
+        for (index, number) in stringNumbers.enumerated() {
+            total += operators[index] + "\(number)"
         }
-
-        textView.text += "=\(total)"
-
+        print(total)
+        if total.first == "+" {
+            total = String(total.dropFirst())
+        }
+        let mathExpression = NSExpression(format: total)
+        let mathValue = mathExpression.expressionValue(with: nil, context: nil) as? Int
+        textView.text += "=\(mathValue!)"
         clear()
     }
 
