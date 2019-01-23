@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C1196D2821F8A20C00BB7281 /* CountOnMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1196D2721F8A20C00BB7281 /* CountOnMeTests.swift */; };
+		C1196D3321F8BC1100BB7281 /* BrainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1196D3221F8BC1100BB7281 /* BrainModel.swift */; };
 		C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADC1D7581BB00477020 /* AppDelegate.swift */; };
 		C926DADF1D7581BB00477020 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADE1D7581BB00477020 /* ViewController.swift */; };
 		C926DAE21D7581BB00477020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C926DAE01D7581BB00477020 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		C1196D2521F8A20C00BB7281 /* CountOnMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1196D2721F8A20C00BB7281 /* CountOnMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountOnMeTests.swift; sourceTree = "<group>"; };
 		C1196D2921F8A20C00BB7281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1196D3221F8BC1100BB7281 /* BrainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainModel.swift; sourceTree = "<group>"; };
 		C926DAD91D7581BB00477020 /* CountOnMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOnMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C926DADC1D7581BB00477020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C926DADE1D7581BB00477020 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				C926DAE31D7581BB00477020 /* Assets.xcassets */,
 				C926DAE51D7581BB00477020 /* LaunchScreen.storyboard */,
 				C926DAE81D7581BB00477020 /* Info.plist */,
+				C1196D3221F8BC1100BB7281 /* BrainModel.swift */,
 			);
 			name = CountOnMe;
 			path = "Zozor+";
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1196D3321F8BC1100BB7281 /* BrainModel.swift in Sources */,
 				C926DADF1D7581BB00477020 /* ViewController.swift in Sources */,
 				C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */,
 			);
