@@ -32,4 +32,21 @@ class Brain {
         }
         return text
     }
+    func calculateTotal() -> String {
+        var total = ""
+        for (index, number) in stringNumbers.enumerated() {
+            total += operators[index] + "\(number)"
+        }
+        if total.first == "+" {
+            total = String(total.dropFirst())
+        }
+        let mathExpression = NSExpression(format: total)
+        let mathValue = mathExpression.expressionValue(with: nil, context: nil) as? Int
+        let finalResultDisplay = updateDisplay() + "= " + String(mathValue!)
+        return finalResultDisplay
+    }
+    func clear() {
+        stringNumbers = [String()]
+        operators = ["+"]
+    }
 }

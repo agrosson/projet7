@@ -71,7 +71,11 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func equal() {
-        calculateTotal()
+        if !isExpressionCorrect {
+            return
+        }
+        textView.text = brain.calculateTotal()
+        brain.clear()
     }
     // MARK: - Methods
     func alertNewCalculation() {
@@ -94,25 +98,5 @@ class ViewController: UIViewController {
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
-    }
-    func calculateTotal() {
-        if !isExpressionCorrect {
-            return
-        }
-        var total = ""
-        for (index, number) in brain.stringNumbers.enumerated() {
-            total += brain.operators[index] + "\(number)"
-        }
-        if total.first == "+" {
-            total = String(total.dropFirst())
-        }
-        let mathExpression = NSExpression(format: total)
-        let mathValue = mathExpression.expressionValue(with: nil, context: nil) as? Int
-        textView.text += "=\(mathValue!)"
-        clear()
-    }
-    func clear() {
-        brain.stringNumbers = [String()]
-        brain.operators = ["+"]
     }
 }
