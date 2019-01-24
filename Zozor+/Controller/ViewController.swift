@@ -34,55 +34,46 @@ class ViewController: UIViewController {
         return true
     }
     // MARK: - Outlets
-
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
-
     // MARK: - Action
-
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
-                print(index)
-                addNewNumber(index)
-            }
+            textView.text =  brain.addNewNumber(index)
+        }
     }
-
     @IBAction func multiply(_ sender: UIButton) {
         if canAddOperator {
             brain.operators.append("*")
             brain.stringNumbers.append("")
-            updateDisplay()
+            textView.text = brain.updateDisplay()
         }
     }
     @IBAction func plus() {
         if canAddOperator {
-        	brain.operators.append("+")
-        	brain.stringNumbers.append("")
-            updateDisplay()
+            brain.operators.append("+")
+            brain.stringNumbers.append("")
+            textView.text =  brain.updateDisplay()
         }
     }
-
     @IBAction func minus() {
         if canAddOperator {
             brain.operators.append("-")
             brain.stringNumbers.append("")
-            updateDisplay()
+            textView.text =  brain.updateDisplay()
         }
     }
-
     @IBAction func divide(_ sender: UIButton) {
         if canAddOperator {
             brain.operators.append("/")
             brain.stringNumbers.append("")
-            updateDisplay()
+            textView.text = brain.updateDisplay()
         }
     }
     @IBAction func equal() {
         calculateTotal()
     }
-
     // MARK: - Methods
-
     func alertNewCalculation() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Démarrez un nouveau calcul !",
@@ -104,15 +95,6 @@ class ViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func addNewNumber(_ newNumber: Int) {
-        if let stringNumber = brain.stringNumbers.last {
-            var stringNumberMutable = stringNumber
-            stringNumberMutable += "\(newNumber)"
-            brain.stringNumbers[brain.stringNumbers.count-1] = stringNumberMutable
-        }
-        updateDisplay()
-    }
-
     func calculateTotal() {
         if !isExpressionCorrect {
             return
@@ -121,7 +103,6 @@ class ViewController: UIViewController {
         for (index, number) in brain.stringNumbers.enumerated() {
             total += brain.operators[index] + "\(number)"
         }
-        print(total)
         if total.first == "+" {
             total = String(total.dropFirst())
         }
@@ -130,20 +111,6 @@ class ViewController: UIViewController {
         textView.text += "=\(mathValue!)"
         clear()
     }
-
-    func updateDisplay() {
-        var text = ""
-        for (index, myNumber) in brain.stringNumbers.enumerated() {
-            // Add operator
-            if index > 0 {
-                text += brain.operators[index]
-            }
-            // Add number
-            text += myNumber
-        }
-        textView.text = text
-    }
-
     func clear() {
         brain.stringNumbers = [String()]
         brain.operators = ["+"]
