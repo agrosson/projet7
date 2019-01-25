@@ -23,7 +23,6 @@ class CountOnMeTests: XCTestCase {
     // Test
     XCTAssert(result == "4+6*9")
     }
-    
     func test1GivenFirstCharacterIsZero_WhenAddSecondCharacter_ThenDropFirstCharacter() {
     //Given
         let brain = Brain()
@@ -43,5 +42,25 @@ class CountOnMeTests: XCTestCase {
         let result = brain.addNewNumber(2)
         // Test
         XCTAssert(result == "22+2")
+    }
+    func testGivenOperatorsAndStringNumbersAreMoreThanOne_WhenClear_ThenOperatorsAndStringNumbersAreReset() {
+    //Given
+        let brain = Brain()
+        brain.stringNumbers = ["22", "10"]
+        brain.operators = ["+", "+"]
+    // When
+        brain.clear()
+    // Test
+        XCTAssert(brain.stringNumbers == [""] && brain.operators == ["+"] )
+    }
+    func testGiven4plus6times6_WhenCalculateTotal_ThenIsString4plus6times6equals40() {
+    //Given
+    let brain = Brain()
+    brain.stringNumbers = ["4", "6", "6"]
+    brain.operators = ["+", "+", "*"]
+    // When
+    let result = brain.calculateTotal()
+    // Test
+    XCTAssert(result == "4+6*6 = 40")
     }
 }

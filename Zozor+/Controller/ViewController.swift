@@ -31,6 +31,12 @@ class ViewController: UIViewController {
                 return false
             }
         }
+        if textView.text.contains(" = ") {
+            brain.operators = ["+"]
+            brain.stringNumbers = [brain.resultMemory]
+            textView.text = brain.updateDisplay()
+            return true
+        }
         return true
     }
     // MARK: - Outlets
@@ -75,7 +81,7 @@ class ViewController: UIViewController {
             return
         }
         textView.text = brain.calculateTotal()
-        brain.clear()
+       //brain.clear()
     }
     // MARK: - Methods
     func alertNewCalculation() {

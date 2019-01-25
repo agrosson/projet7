@@ -11,6 +11,7 @@ import Foundation
 class Brain {
     var stringNumbers = [String()]
     var operators = ["+"]
+    var resultMemory = ""
     init() {}
     func addNewNumber(_ newNumber: Int) -> String {
         if let stringNumber = stringNumbers.last {
@@ -46,7 +47,9 @@ class Brain {
         }
         let mathExpression = NSExpression(format: total)
         let mathValue = mathExpression.expressionValue(with: nil, context: nil) as? Int
-        let finalResultDisplay = updateDisplay() + "= " + String(mathValue!)
+        total = String(mathValue!)
+        resultMemory = total
+        let finalResultDisplay = updateDisplay() + " = " + total
         return finalResultDisplay
     }
     func clear() {
