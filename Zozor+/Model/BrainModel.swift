@@ -15,7 +15,11 @@ class Brain {
     func addNewNumber(_ newNumber: Int) -> String {
         if let stringNumber = stringNumbers.last {
             var stringNumberMutable = stringNumber
-            stringNumberMutable += "\(newNumber)"
+            if stringNumberMutable.first == "0" {
+                stringNumberMutable = "\(newNumber)"
+            } else {
+                stringNumberMutable += "\(newNumber)"
+            }
             stringNumbers[stringNumbers.count-1] = stringNumberMutable
         }
         return updateDisplay()
@@ -24,7 +28,7 @@ class Brain {
         var text = ""
         for (index, myNumber) in stringNumbers.enumerated() {
             // Add operator
-            if index > 0 {
+            if index > 0 { // the first "+" is not displayed
                 text += operators[index]
             }
             // Add number
