@@ -45,6 +45,9 @@ class ViewController: UIViewController {
     // MARK: - Action
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
+            if textView.text.contains("=") {
+                brain.clear()
+            }
             textView.text =  brain.addNewNumber(index)
         }
     }
@@ -80,10 +83,25 @@ class ViewController: UIViewController {
         if !isExpressionCorrect {
             return
         }
+        if textView.text.contains("/0") {
+            alertDivideByZero()
+            return
+        }
         textView.text = brain.calculateTotal()
-       //brain.clear()
+        //brain.clear()
+    }
+    @IBAction func clearScreen(_ sender: UIButton) {
+        brain.clear()
+        textView.text = "Entrer un nombre"
     }
     // MARK: - Methods
+    func alertDivideByZero() {
+        let alertVC = UIAlertController(title: "Impossible de diviser par 0!",
+                                        message: "Démarrez un nouveau calcul !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
     func alertNewCalculation() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Démarrez un nouveau calcul !",
