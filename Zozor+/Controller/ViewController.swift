@@ -49,6 +49,9 @@ class ViewController: UIViewController {
                 brain.clear()
             }
             textView.text =  brain.addNewNumber(index)
+            if !brain.isAnInt() {
+                alertIncorrectInt()
+            }
         }
     }
     @IBAction func multiply(_ sender: UIButton) {
@@ -88,11 +91,14 @@ class ViewController: UIViewController {
             return
         }
         textView.text = brain.calculateTotal()
-        //brain.clear()
+        if brain.fatalError == true {
+            alertIncorrectResultInt()
+        }
     }
     @IBAction func clearScreen(_ sender: UIButton) {
         brain.clear()
-        textView.text = "Entrer un nombre"
+        brain.fatalError = false
+        textView.text = "0"
     }
     // MARK: - Methods
     func alertDivideByZero() {
@@ -119,6 +125,20 @@ class ViewController: UIViewController {
     func alertIncorrectExpresion() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Expression incorrecte !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    func alertIncorrectInt() {
+        let alertVC = UIAlertController(title: "Zéro!",
+                                        message: "Ce chiffre n'est pas un Int !",
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    func alertIncorrectResultInt() {
+        let alertVC = UIAlertController(title: "Zéro!",
+                                        message: "Ce résultat n'est pas un Int !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
