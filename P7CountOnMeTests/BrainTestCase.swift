@@ -89,10 +89,9 @@ class BrainTestCase: XCTestCase {
         brain.stringNumbers = ["4444444444444444", "4444444444444444", "4444444444444444"]
         brain.operators = ["*", "*", "*"]
         // When
-        let result = brain.calculateTotal()
+        _ = brain.calculateTotal()
         // Test
         XCTAssert(brain.fatalError == true)
-        XCTAssert(result == "4444444444444444*4444444444444444*4444444444444444 = 0")
     }
     func testGivenLonString_WhenCalculateTotal_ThenIsStringequals90() {
         //Given

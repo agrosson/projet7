@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - Properties
     let brain = Brain()
+    //
     var isExpressionCorrect: Bool {
         if let stringNumber = brain.stringNumbers.last {
             if stringNumber.isEmpty {
@@ -95,6 +96,7 @@ class ViewController: UIViewController {
             alertIncorrectResultInt()
             textView.text = "0"
             brain.clear()
+            brain.fatalError = false
         }
     }
     @IBAction func clearScreen(_ sender: UIButton) {

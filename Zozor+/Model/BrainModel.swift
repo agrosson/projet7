@@ -17,9 +17,16 @@ import Foundation
     3. var resultMemory
     4. var fatalError
  
- 19 Functions
+ 9 Functions:
  - init()
- - gameStart()
+ - addNewNumber(_ newNumber: Int) -> String
+ - updateDisplay() -> String
+ - calculateTotal() -> String
+ - clear()
+ - isAnInt() -> Bool
+ - calculation(arrayOf numbers: [Int], with operators: [String]) -> Int
+ - calcul2(arrayOf numbers: [Int], with operators: [String]) -> Int
+ - checkIfNil(num: Double) -> Int
  
  */
 class Brain {
@@ -112,8 +119,7 @@ class Brain {
             }
         }
         return true
-    }
-    
+    }    
     /**
      Recursive function that computes the result and returns result as a Int
      - Parameter numbers: Arrays of Int to be computed
