@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - Properties
     let brain = Brain()
-    //
+    /// Variable that tests if expression typed is correct for computing
     var isExpressionCorrect: Bool {
         if let stringNumber = brain.stringNumbers.last {
             if stringNumber.isEmpty {
@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         }
         return true
     }
+    /// Variable that tests if an operator can be added on screen
     var canAddOperator: Bool {
         if let stringNumber = brain.stringNumbers.last {
             if stringNumber.isEmpty {
