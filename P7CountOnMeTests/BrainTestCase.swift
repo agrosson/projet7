@@ -73,4 +73,82 @@ class BrainTestCase: XCTestCase {
             // Test
             XCTAssert(result == "4+6*6 = 40")
         }
+    func testGiven4plus6plus6_WhenCalculateTotal_ThenIsString4plus6plus6equals16() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["4", "6", "6"]
+        brain.operators = ["+", "+", "+"]
+        // When
+        let result = brain.calculateTotal()
+        // Test
+        XCTAssert(result == "4+6+6 = 16")
+    }
+    func testGivenMultiplyLongINT_WhenCalculateTotal_ThenFatalErrorIsTrue() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["4444444444444444", "4444444444444444", "4444444444444444"]
+        brain.operators = ["*", "*", "*"]
+        // When
+        let result = brain.calculateTotal()
+        // Test
+        XCTAssert(brain.fatalError == true)
+        XCTAssert(result == "4444444444444444*4444444444444444*4444444444444444 = 0")
+    }
+    func testGivenLonString_WhenCalculateTotal_ThenIsStringequals90() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["100", "10", "100", "10", "5", "2"]
+        brain.operators = ["+", "-", "+", "/", "-", "*"]
+        // When
+        let result = brain.calculateTotal()
+        // Test
+        XCTAssert(result == "100-10+100/10-5*2 = 90")
+    }
+    func testGiven10divide2plus6_WhenCalculateTotal_ThenIsString10divide2plus6equals11() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["10", "2", "6"]
+        brain.operators = ["+", "/", "+"]
+        // When
+        let result = brain.calculateTotal()
+        // Test
+        XCTAssert(result == "10/2+6 = 11")
+    }
+    func testGivenAllNumbersAreInt_WhenIsAnInt_ThenReturnTrue() {
+    //Given
+        let brain = Brain()
+        brain.stringNumbers = ["4", "6", "6"]
+    // When
+        let answer = brain.isAnInt()
+    // Test
+    XCTAssert(answer == true)
+    }
+    func testGivenNotAllNumbersAreInt_WhenIsAnInt_ThenReturnFalse() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["444444444444444444444444444444444444444", "6", "6"]
+        // When
+        let answer = brain.isAnInt()
+        // Test
+        XCTAssert(answer == false)
+    }
+    func testGivenNumberEmpty_WhenCalculation_ThenReturn0() {
+    //Given
+        let brain = Brain()
+        let stringNum = [Int]()
+        let oper = [String]()
+    // When
+        let result = brain.calculation(arrayOf: stringNum, with: oper)
+    // Test
+    XCTAssert(result == 0)
+    }
+    func testGivenNumberHasOneElemznt_WhenCalculation_ThenReturnUniqueElement() {
+        //Given
+        let brain = Brain()
+        brain.stringNumbers = ["6"]
+        // When
+        let result = brain.calculateTotal()
+        // Test
+        XCTAssert(result == "6 = 6")
+}
 }

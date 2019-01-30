@@ -93,6 +93,8 @@ class ViewController: UIViewController {
         textView.text = brain.calculateTotal()
         if brain.fatalError == true {
             alertIncorrectResultInt()
+            textView.text = "0"
+            brain.clear()
         }
     }
     @IBAction func clearScreen(_ sender: UIButton) {
