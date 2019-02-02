@@ -75,7 +75,7 @@ class Brain {
         for (index, myNumber) in stringNumbers.enumerated() {
             // Add operator
             if index > 0 { // the first "+" is not displayed
-                text += operators[index]
+                text += operators[index] + "\n"
             }
             // Add number
             text += myNumber
@@ -97,7 +97,7 @@ class Brain {
         // computation
         resultMemory = String(calculation(arrayOf: myArrayOfNumber, with: operators))
         // result as a equality string
-        let finalResultDisplay = updateDisplay() + " = " + resultMemory
+        let finalResultDisplay = updateDisplay() + " = " + "\n" + resultMemory
         return finalResultDisplay
     }
     /**
@@ -119,7 +119,7 @@ class Brain {
             }
         }
         return true
-    }    
+    }
     /**
      Recursive function that computes the result and returns result as a Int
      - Parameter numbers: Arrays of Int to be computed
@@ -144,8 +144,7 @@ class Brain {
             let resultNum =  calcul2(arrayOf: numbers, with: operators)
             return resultNum
         }
-        // case 4 : Recursive case
-        if numbers.count >= 3 {
+        // case 4 : Recursive case if numbers.count >= 3
             // case with no priority
             if operators[2] == "+" || operators[2] == "-" {
                 let firstTable = [numbers[0], numbers[1]]
@@ -155,8 +154,8 @@ class Brain {
                 newTable.insert(calculation(arrayOf: firstTable, with: firstOperator), at: 0)
                 newOperators.insert("+", at: 0)
                 return calculation(arrayOf: newTable, with: newOperators)
-                // case with priority "*" or "/"
-            } else if operators[2] == "*" || operators[2] == "/" {
+            }
+        // case with priority "*" or "/" : operators[2] == "*" || operators[2] == "/" 
                 let firstTable = [numbers[1], numbers[2]]
                 let firstOperator = [operators[1], operators[2]]
                 var newTable = numbers
@@ -166,9 +165,6 @@ class Brain {
                 var newOperators = operators
                 newOperators.remove(at: 2)
                 return calculation(arrayOf: newTable, with: newOperators)
-            }
-        }
-        return 0
     }
     /**
     Function of base case that computes the result of computation with two elements and returns result as a Int
@@ -192,11 +188,9 @@ class Brain {
            result = num1 * num2
              return checkIfNil(num: result)
         }
-        if operators[1] == "/" {
+     //   if operators[1] == "/" 
            result = num1 / num2
              return checkIfNil(num: result)
-        }
-        return Int(result)
     }
     /**
      Function that checks if result is a Int and returns result as a Int if so
@@ -211,8 +205,7 @@ class Brain {
             self.fatalError = true
             self.clear()
             return 0
-        } else {
-            return Int(num)
         }
+            return Int(num)
     }
 }

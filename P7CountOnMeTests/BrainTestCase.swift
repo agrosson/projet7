@@ -21,7 +21,7 @@ class BrainTestCase: XCTestCase {
             // When
             let result = brain.updateDisplay()
             // Test
-            XCTAssert(result == "4+6*9")
+            XCTAssert(result == "4+\n6*\n9")
         }
         func test1GivenFirstCharacterIsZero_WhenAddSecondCharacter_ThenDropFirstCharacter() {
             //Given
@@ -41,7 +41,7 @@ class BrainTestCase: XCTestCase {
             // When
             let result = brain.addNewNumber(2)
             // Test
-            XCTAssert(result == "22+2")
+            XCTAssert(result == "22+\n2")
         }
         func test2GivenFirstCharacterIsNotZero_WhenAddSecondCharacter_ThenNotDropFirstCharacter() {
         //Given
@@ -51,7 +51,7 @@ class BrainTestCase: XCTestCase {
         // When
         let result = brain.addNewNumber(2)
         // Test
-        XCTAssert(result == "22+42")
+        XCTAssert(result == "22+\n42")
     }
         func testGivenOperatorsAndStringNumbersAreMoreThanOne_WhenClear_ThenOperatorsAndStringNumbersAreReset() {
             //Given
@@ -71,7 +71,7 @@ class BrainTestCase: XCTestCase {
             // When
             let result = brain.calculateTotal()
             // Test
-            XCTAssert(result == "4+6*6 = 40")
+            XCTAssert(result == "4+\n6*\n6 = \n40")
         }
     func testGiven4plus6plus6_WhenCalculateTotal_ThenIsString4plus6plus6equals16() {
         //Given
@@ -81,7 +81,7 @@ class BrainTestCase: XCTestCase {
         // When
         let result = brain.calculateTotal()
         // Test
-        XCTAssert(result == "4+6+6 = 16")
+        XCTAssert(result == "4+\n6+\n6 = \n16")
     }
     func testGivenMultiplyLongINT_WhenCalculateTotal_ThenFatalErrorIsTrue() {
         //Given
@@ -101,7 +101,7 @@ class BrainTestCase: XCTestCase {
         // When
         let result = brain.calculateTotal()
         // Test
-        XCTAssert(result == "100-10+100/10-5*2 = 90")
+        XCTAssert(result == "100-\n10+\n100/\n10-\n5*\n2 = \n90")
     }
     func testGiven10divide2plus6_WhenCalculateTotal_ThenIsString10divide2plus6equals11() {
         //Given
@@ -111,7 +111,7 @@ class BrainTestCase: XCTestCase {
         // When
         let result = brain.calculateTotal()
         // Test
-        XCTAssert(result == "10/2+6 = 11")
+        XCTAssert(result == "10/\n2+\n6 = \n11")
     }
     func testGivenAllNumbersAreInt_WhenIsAnInt_ThenReturnTrue() {
     //Given
@@ -148,6 +148,6 @@ class BrainTestCase: XCTestCase {
         // When
         let result = brain.calculateTotal()
         // Test
-        XCTAssert(result == "6 = 6")
+        XCTAssert(result == "6 = \n6")
 }
 }
