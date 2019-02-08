@@ -162,11 +162,10 @@ class ViewController: UIViewController {
     private func alertDivide() {
         let alertVC = UIAlertController(title: "Attention!",
                                         message: """
-        Une division avec des INT ne tient pas compte des décimales!
-        Il se peut que le résultat soit tronqué!
-    """,
-                                        
-    preferredStyle: .alert)
+                                        Une division avec des INT ne tient pas compte des décimales!
+                                        Il se peut que le résultat soit tronqué!
+                                        """,
+                                        preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
