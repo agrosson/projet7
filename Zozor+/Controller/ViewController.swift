@@ -51,6 +51,7 @@ class ViewController: UIViewController {
                 brain.clear()
             }
             textView.text =  brain.addNewNumber(index)
+            textViewScrollToBottom()
             if !brain.isAnInt() {
                 alertIncorrectInt()
             }
@@ -59,40 +60,42 @@ class ViewController: UIViewController {
     @IBAction func multiply(_ sender: UIButton) {
         if canAddOperator {
             brain.operators.append("*")
-            brain.stringNumbers.append("")
-            textView.text = brain.updateDisplay()
+            updateScreen()
         }
     }
     @IBAction func plus() {
         if canAddOperator {
             brain.operators.append("+")
-            brain.stringNumbers.append("")
-            textView.text =  brain.updateDisplay()
+            updateScreen()
         }
     }
     @IBAction func minus() {
         if canAddOperator {
             brain.operators.append("-")
-            brain.stringNumbers.append("")
-            textView.text =  brain.updateDisplay()
+            updateScreen()
         }
     }
     @IBAction func divide(_ sender: UIButton) {
         if canAddOperator {
             brain.operators.append("/")
-            brain.stringNumbers.append("")
-            textView.text = brain.updateDisplay()
+            updateScreen()
         }
     }
     @IBAction func equal() {
         if !isExpressionCorrect {
             return
         }
-        if textView.text.contains("/0") {
+        if textView.text.contains("/\n0") {
             alertDivideByZero()
+            brain.clear()
+            textView.text = "0"
             return
         }
+        if textView.text.contains("/") {
+            alertDivide()
+        }
         textView.text = brain.calculateTotal()
+        textViewScrollToBottom()
         if brain.fatalError == true {
             alertIncorrectResultInt()
             textView.text = "0"
@@ -106,45 +109,64 @@ class ViewController: UIViewController {
         textView.text = "0"
     }
     // MARK: - Methods
-    func alertDivideByZero() {
+    private func updateScreen() {
+        brain.stringNumbers.append("")
+        textView.text = brain.updateDisplay()
+    }
+    private func textViewScrollToBottom() {
+        let bottom = NSRange(location: textView.text.count, length: 1)
+        textView.scrollRangeToVisible(bottom)
+    }
+    private func alertDivideByZero() {
         let alertVC = UIAlertController(title: "Impossible de diviser par 0!",
                                         message: "Démarrez un nouveau calcul !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func alertNewCalculation() {
+    private func alertNewCalculation() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Démarrez un nouveau calcul !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func alertEnterCorrectExpression() {
+    private func alertEnterCorrectExpression() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Entrez une expression correcte !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func alertIncorrectExpresion() {
+    private func alertIncorrectExpresion() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Expression incorrecte !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func alertIncorrectInt() {
+    private func alertIncorrectInt() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Ce chiffre n'est pas un Int !",
                                         preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-    func alertIncorrectResultInt() {
+    private func alertIncorrectResultInt() {
         let alertVC = UIAlertController(title: "Zéro!",
                                         message: "Ce résultat n'est pas un Int !",
                                         preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    private func alertDivide() {
+        let alertVC = UIAlertController(title: "Attention!",
+                                        message: """
+        Une division avec des INT ne tient pas compte des décimales!
+        Il se peut que le résultat soit tronqué!
+    """,
+                                        
+    preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }

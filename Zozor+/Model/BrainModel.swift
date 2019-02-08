@@ -40,7 +40,7 @@ class Brain {
     /// Boolean that tracks if the result of the computation is not an Int
     var fatalError = false
     // MARK: Methods
-    /// Init ficntion
+    /// Init function
     init() {}
     /**
      Function that adds a digit when user types a number for the calculation
@@ -74,7 +74,7 @@ class Brain {
         var text = ""
         for (index, myNumber) in stringNumbers.enumerated() {
             // Add operator
-            if index > 0 { // the first "+" is not displayed
+            if index > 0 { // the first "+" is not displayed - New line is created on screen after each operator
                 text += operators[index] + "\n"
             }
             // Add number
