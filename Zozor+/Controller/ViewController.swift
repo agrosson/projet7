@@ -105,7 +105,6 @@ class ViewController: UIViewController {
     }
     @IBAction func clearScreen(_ sender: UIButton) {
         brain.clear()
-        brain.fatalError = false
         textView.text = "0"
     }
     // MARK: - Methods
