@@ -129,7 +129,7 @@ class Brain {
      - The string is computed from 2 arrays : stringNumbers and operators
      - A specific computation is made depending on the number of items in the array
      */
-    func calculation(arrayOf numbers: [Int], with operators: [String]) -> Int {
+    private func calculation(arrayOf numbers: [Int], with operators: [String]) -> Int {
         // Case1
         if numbers.count == 0 {
             print("la table est vide")
@@ -200,7 +200,7 @@ class Brain {
      - The test consists in casting result as a double and checking if less that Int.max
      */
     private func checkIfNil(num: Double) -> Int {
-        if num >  Double(Int.max) {
+        if abs(num) >  abs(Double(Int.max)) {
             print("error")
             self.fatalError = true
             self.clear()
